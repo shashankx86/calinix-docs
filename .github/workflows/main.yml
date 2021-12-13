@@ -20,6 +20,8 @@ jobs:
           cd CNAME_rx
           echo 'wiki.calinix.tech' > CNAME
           cat CNAME
+          cd ..
+          pwd
       - uses: actions/checkout@v2
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
@@ -31,4 +33,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+          directory: CNAME_rx
 
