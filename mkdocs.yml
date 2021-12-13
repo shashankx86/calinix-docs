@@ -5,6 +5,7 @@ site_description: "A detailed user guide to a CalinixOS user, which takes you th
 site_author: "Arghya Sarkar, Founder and Lead of Calinix Project"
 copyright: "Copyright © The Calinix Project 2021"
 
+
 nav:
     - Home:
       - 'index.md'
