@@ -9,8 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Depoly Wiki
       - uses: actions/checkout@v2
+      - name: Depoly Wiki
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
