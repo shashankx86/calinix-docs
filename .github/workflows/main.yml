@@ -22,14 +22,18 @@ jobs:
           cd CNAME_rx
           echo 'wiki.calinix.tech' > CNAME
           cat CNAME
-      - name: Pushes test file
-      - uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - uses: actions/checkout@v2
         with:
-          source_file: 'CNAME'
-          destination_repo: 'shashankx86/temp'
-          destination_folder: ''
-          user_email: 'shashankspis20@gmail.com'
-          user_name: 'shashankx86'
-          commit_message: 'test'
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          repository: "shashankx86/temp"
