@@ -15,17 +15,18 @@ jobs:
       - run: pip install mkdocs-material # 
       - run: mkdocs gh-deploy --force
       - uses: actions/checkout@v2
-      - run: |
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: test init
+        run: |
           mkdir CNAME_rx
           cd CNAME_rx
           echo 'wiki.calinix.tech' > CNAME
           cat CNAME
+          cd ..
           pwd
           ls
-      - uses: actions/checkout@v2
-        with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - run: |
          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
          git config --local user.name "github-actions[bot]"
@@ -33,5 +34,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-          directory: "/home/runner/work/calinix-docs/calinix-docs/CNAME_rx"
+          directory: "CNAME_rx"
 
