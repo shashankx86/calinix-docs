@@ -20,7 +20,6 @@ jobs:
           cd CNAME_rx
           echo 'wiki.calinix.tech' > CNAME
           cat CNAME
-          cd ..
           pwd
           ls
       - uses: actions/checkout@v2
