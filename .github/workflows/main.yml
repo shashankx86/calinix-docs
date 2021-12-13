@@ -1,15 +1,14 @@
-name: ci 
+name: CI
 on:
   push:
     branches: 
       - master
       - main
-
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Depoly Wiki
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
@@ -17,8 +16,19 @@ jobs:
       - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
       - uses: actions/checkout@v2
+      - name: Set Custom Domain
       - run: |
           mkdir CNAME_rx
           cd CNAME_rx
           echo 'wiki.calinix.tech' > CNAME
           cat CNAME
+      - uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'CNAME'
+          destination_repo: 'shashankx86/temp'
+          destination_folder: ''
+          user_email: 'shashankspis20@gmail.com'
+          user_name: 'shashankx86'
+          commit_message: 'test'
