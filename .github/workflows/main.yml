@@ -1,7 +1,7 @@
-name: ci # 
+name: ci 
 on:
   push:
-    branches: # 
+    branches: 
       - master
       - main
 
@@ -14,5 +14,11 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material # 
+      - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir CNAME_rx
+          cd CNAME_rx
+          echo 'wiki.calinix.tech' > CNAME
+          cat CNAME
