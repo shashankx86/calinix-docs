@@ -14,7 +14,6 @@ nav:
       - 'starters-guide/getting-started.md'
       - 'starters-guide/installation.md'
 
-
     - Interface: 
       - "interface/the-awesomewm.md"
       - "interface/wm-vs-de.md"
